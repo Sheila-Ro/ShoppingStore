@@ -1,21 +1,24 @@
 public class Product
 {
     public string Name {get; private set;}
+    public int InitialCount {get; private set;}
     public int Count {get; private set;}
     public int Sold {get; private set;}
-    public double Prize {get; private set;}
+    public double Price {get; private set;}
 
-    public Product(string name, int initialCount, double prize)
+    public Product(string name, int initialCount, double price)
     {
         this.Name = name;
-        this.Count = initialCount;
-        this.Prize = prize;
+        this.InitialCount = this.Count = initialCount;
+        this.Price = price;
     }
 
-    public void Despatch()
+    public double Sell(int units)
     {
-        this.Sold += 1;
+        this.Sold += units;
+        this.Count -= units;
+        return this.Price * units;
     }
 
-    public double TotalPrize { get { return this.Sold * this.Prize; } }
+    public double TotalSold { get { return this.Sold * this.Price; } }
 }
